@@ -6,7 +6,7 @@ import org.osgi.framework.BundleContext;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.helpers.RentalAgencyGenerator;
 
-public class MyActivator implements BundleActivator {
+public class RentalCoreActivator implements BundleActivator {
 
 	private static BundleContext context;
 	
@@ -21,7 +21,7 @@ public class MyActivator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		MyActivator.context = bundleContext;
+		RentalCoreActivator.context = bundleContext;
 	}
 
 	/*
@@ -29,10 +29,10 @@ public class MyActivator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
-		MyActivator.context = null;
+		RentalCoreActivator.context = null;
 	}
 
-	public RentalAgency getAgency() {
+	public  static RentalAgency getAgency() {
 		if (agency == null) {
 			return RentalAgencyGenerator.createSampleAgency();
 		}
