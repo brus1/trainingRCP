@@ -3,15 +3,18 @@ package com.opti.rental.ui.views;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
 import com.opcoach.training.rental.RentalAgency;
 import com.opti.rental.core.RentalCoreActivator;
 import com.opti.rental.ui.RentalProvider;
 
-public class AgenciesView extends ViewPart{
+public class AgenciesView extends ViewPart implements ISelectionListener{
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -23,6 +26,7 @@ public class AgenciesView extends ViewPart{
 		agencies.add(RentalCoreActivator.getAgency());
 		tv.setInput(agencies);
 		tv.expandAll();
+		getSite().setSelectionProvider(tv);
 	}
 
 	@Override
@@ -30,5 +34,13 @@ public class AgenciesView extends ViewPart{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }

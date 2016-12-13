@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import com.opcoach.training.rental.Customer;
@@ -62,6 +63,19 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		}
 		// TODO Auto-generated method stub
 		return super.getText(element);
+	}
+	
+	@Override
+	public Image getImage(Object element) {
+		if(element instanceof RentalAgency) {
+			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_RENTAL);
+		} else if (element instanceof Customer) {
+			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_CUSTOMER);
+		} else if (element instanceof RentalObject) {
+			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_AGENCY);
+		}
+		// TODO Auto-generated method stub
+		return super.getImage(element);
 	}
 	
 	public class Node {
