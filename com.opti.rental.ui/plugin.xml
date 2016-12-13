@@ -10,6 +10,7 @@
       <view
             category="com.opti.rental.ui.category"
             class="com.opti.rental.ui.views.RentalPropertyView"
+            icon="icons/Customers.png"
             id="com.opti.rental.ui.propertyView"
             name="Rental Property"
             restorable="true">
@@ -17,6 +18,7 @@
       <view
             category="com.opti.rental.ui.category"
             class="com.opti.rental.ui.views.AgenciesView"
+            icon="icons/RentalObjects.png"
             id="com.opti.rental.ui.view.agency"
             name="Agencies"
             restorable="true">
@@ -26,6 +28,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.opti.rental.ui.perspective.RentalPrspective"
+            icon="icons/Agency.png"
             id="com.opti.rental.ui.perspective.RentalPrspective"
             name="Rental">
       </perspective>
