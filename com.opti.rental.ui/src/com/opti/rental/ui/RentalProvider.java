@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 
 import com.opcoach.training.rental.Customer;
 import com.opcoach.training.rental.RentalAgency;
+import com.opcoach.training.rental.RentalObject;
 
 public class RentalProvider extends LabelProvider implements ITreeContentProvider {
 
@@ -24,8 +25,12 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if(parentElement instanceof RentalAgency) {
-			RentalAgency parentAgency = (RentalAgency) parentElement;
-			return parentAgency.getCustomers().toArray();
+			RentalAgency a = (RentalAgency) parentElement;
+			return new Node[] {
+				new Node(a, Node.CUSTOMERS), new Node(a, Node.RENTALOBJ), new Node(a, Node.RENTALS)	
+			};
+		}else if (parentElement instanceof Node) {
+			return ((Node) parentElement).getChildren();
 		}
 		return EMPTY_RESULTS;
 	}
@@ -46,11 +51,42 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	public String getText(Object element) {
 		if(element instanceof RentalAgency) {
 			return ((RentalAgency) element).getName();
-		}
-		else if (element instanceof Customer) {
+		} else if (element instanceof Customer) {
 			return ((Customer) element).getDisplayName();
+		} else if (element instanceof RentalObject) {
+			return ((RentalObject) element).getName();
 		}
 		// TODO Auto-generated method stub
 		return super.getText(element);
+	}
+	
+	public class Node {
+		public static final String CUSTOMERS = "customers";
+		public static final String RENTALS = "rentals";
+		public static final String RENTALOBJ = "objects";
+		String label;
+		RentalAgency agency;
+		
+		public Node(RentalAgency agency, String label) {
+			this.agency = agency;
+			this.label = label;
+		}
+		
+		Object[] getChildren() {
+			if(label == CUSTOMERS) {
+				return agency.getCustomers().toArray();
+			} else if (label == RENTALS){
+				return agency.getRentals().toArray();
+			} else if (label == RENTALOBJ) {
+				return agency.getObjectsToRent().toArray();
+			}
+			return null;
+		} 
+		
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return label;
+		}
 	}
 }
