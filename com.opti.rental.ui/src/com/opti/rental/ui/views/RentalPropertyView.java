@@ -1,5 +1,7 @@
 package com.opti.rental.ui.views;
 
+import java.util.Date;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -49,11 +51,11 @@ public class RentalPropertyView extends ViewPart {
 		
 		grpDates = new Group(parent, SWT.NONE);
 		grpDates.setText("Dates de location");
-		grpDates.setData(new Object());
+		grpDates.setData(new Date());
 		grpDates.setLayout(new GridLayout(2, false));
 		
 		Label dateLabel = new Label(grpDates, SWT.NONE);
-		dateLabel.setData(new Object());
+		dateLabel.setData(new Date());
 		dateLabel.setText("du");
 		
 		startDate = new Label(grpDates, SWT.NONE);
