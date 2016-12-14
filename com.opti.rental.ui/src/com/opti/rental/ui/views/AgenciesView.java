@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IMemento;
-import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 
@@ -22,7 +19,7 @@ import com.opti.rental.core.RentalCoreActivator;
 import com.opti.rental.ui.RentalProvider;
 import com.opti.rental.ui.RentalUIActivator;
 
-public class AgenciesView extends ViewPart implements org.eclipse.jface.util.IPropertyChangeListener  {
+public class AgenciesView extends ViewPart implements IPropertyChangeListener  {
 
 	TreeViewer tv;
 	

@@ -53,7 +53,7 @@ public class CustomerView extends ViewPart implements ISelectionListener{
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if(selection instanceof IStructuredSelection) {
 			Object selected = ((IStructuredSelection) selection).getFirstElement();
-			if(selected instanceof Rental) {
+			if(selected instanceof Customer) {
 				setCustomer((Customer) selected);
 			}
 		}	
