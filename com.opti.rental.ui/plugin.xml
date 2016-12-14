@@ -33,5 +33,13 @@
             name="Rental">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.opti.rental.ui.MyPage"
+            id="com.opti.rental.ui.page1"
+            name="Color">
+      </page>
+   </extension>
 
 </plugin>
