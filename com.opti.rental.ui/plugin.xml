@@ -41,5 +41,56 @@
             name="Color">
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="myMenu">
+            <command
+                  commandId="com.opti.rental.ui.helloworld"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.views.ResourceNavigator?after=additions">
+         <menu
+               label="myMenu">
+            <command
+                  commandId="com.opti.rental.ui.helloworld"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.opti.rental.ui.view.agency?after=additions">
+         <menu
+               label="myMenu">
+            <command
+                  commandId="com.opti.rental.ui.helloworld"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         name="SingleCommand"
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.opti.rental.ui.helloworld"
+            name="HelloWorld">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.opti.rental.ui.helloworld.SampleHandler"
+            commandId="com.opti.rental.ui.helloworld">
+      </handler>
+   </extension>
 
 </plugin>

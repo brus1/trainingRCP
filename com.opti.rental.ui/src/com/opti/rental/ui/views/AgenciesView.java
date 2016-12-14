@@ -3,11 +3,13 @@ package com.opti.rental.ui.views;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IViewSite;
@@ -35,6 +37,11 @@ public class AgenciesView extends ViewPart implements org.eclipse.jface.util.IPr
 		tv.setInput(agencies);
 		tv.expandAll();
 		getSite().setSelectionProvider(tv);
+		
+		MenuManager menuManager = new MenuManager();
+		Menu menu = menuManager.createContextMenu(tv.getControl());
+		tv.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuManager, tv);
 	}
 
 	@Override
