@@ -1,5 +1,6 @@
 package com.opti.rental.ui.views;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -34,7 +35,9 @@ public class CustomerView extends ViewPart implements ISelectionListener{
 	}
 	
 	public void setCustomer(Customer r) {
-		customerName.setText(r.getDisplayName());
+		if (r != null) {
+			customerName.setText(r.getDisplayName());
+		}
 	}
 
 	@Override
@@ -51,12 +54,11 @@ public class CustomerView extends ViewPart implements ISelectionListener{
 	
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		if(selection.isEmpty()) return;
 		if(selection instanceof IStructuredSelection) {
 			Object selected = ((IStructuredSelection) selection).getFirstElement();
-			if(selected instanceof Customer) {
-				setCustomer((Customer) selected);
-			}
+				Customer customer = Platform.getAdapterManager().getAdapter(selected, Customer.class);
+				setCustomer((Customer) customer);
 		}	
 	}
-
 }
