@@ -1,4 +1,4 @@
-package com.opti.rental.ui.helloworld;
+package com.opti.rental.ui.handler;
 
 import java.util.Map;
 

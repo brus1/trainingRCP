@@ -1,9 +1,12 @@
-package com.opti.rental.ui;
+package com.opti.rental.ui.preferance;
 
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+
+import com.opti.rental.ui.RentalUIActivator;
+import com.opti.rental.ui.RentalUIConstants;
 
 public class MyPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage, RentalUIConstants {
 
