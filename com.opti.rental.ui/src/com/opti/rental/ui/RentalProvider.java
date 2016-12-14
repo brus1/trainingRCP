@@ -2,19 +2,17 @@ package com.opti.rental.ui;
 
 import java.util.Collection;
 
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 
 import com.opcoach.training.rental.Customer;
+import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.RentalObject;
 
@@ -25,20 +23,18 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Object[] getElements(Object inputElement) {
 		Object[] result = null;
-		if(inputElement instanceof Collection<?>) {
-			result =((Collection<?>) inputElement).toArray();
+		if (inputElement instanceof Collection<?>) {
+			result = ((Collection<?>) inputElement).toArray();
 		}
 		return result;
 	}
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if(parentElement instanceof RentalAgency) {
+		if (parentElement instanceof RentalAgency) {
 			RentalAgency a = (RentalAgency) parentElement;
-			return new Node[] {
-				new Node(a, Node.CUSTOMERS), new Node(a, Node.RENTALOBJ), new Node(a, Node.RENTALS)	
-			};
-		}else if (parentElement instanceof Node) {
+			return new Node[] { new Node(a, Node.CUSTOMERS), new Node(a, Node.RENTALOBJ), new Node(a, Node.RENTALS) };
+		} else if (parentElement instanceof Node) {
 			return ((Node) parentElement).getChildren();
 		}
 		return EMPTY_RESULTS;
@@ -58,7 +54,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 
 	@Override
 	public String getText(Object element) {
-		if(element instanceof RentalAgency) {
+		if (element instanceof RentalAgency) {
 			return ((RentalAgency) element).getName();
 		} else if (element instanceof Customer) {
 			return ((Customer) element).getDisplayName();
@@ -68,10 +64,10 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		// TODO Auto-generated method stub
 		return super.getText(element);
 	}
-	
+
 	@Override
 	public Image getImage(Object element) {
-		if(element instanceof RentalAgency) {
+		if (element instanceof RentalAgency) {
 			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_RENTAL);
 		} else if (element instanceof Customer) {
 			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_CUSTOMER);
@@ -81,30 +77,30 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		// TODO Auto-generated method stub
 		return super.getImage(element);
 	}
-	
+
 	public class Node {
 		public static final String CUSTOMERS = "customers";
 		public static final String RENTALS = "rentals";
 		public static final String RENTALOBJ = "objects";
 		String label;
 		RentalAgency agency;
-		
+
 		public Node(RentalAgency agency, String label) {
 			this.agency = agency;
 			this.label = label;
 		}
-		
+
 		Object[] getChildren() {
-			if(label == CUSTOMERS) {
+			if (label == CUSTOMERS) {
 				return agency.getCustomers().toArray();
-			} else if (label == RENTALS){
+			} else if (label == RENTALS) {
 				return agency.getRentals().toArray();
 			} else if (label == RENTALOBJ) {
 				return agency.getObjectsToRent().toArray();
 			}
 			return null;
-		} 
-		
+		}
+
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
@@ -151,14 +147,15 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	}
 
 	@Override
-	public Color getForeground(Object element) {//get values
-		if(element instanceof Customer) {
+	public Color getForeground(Object element) {// get values
+		if (element instanceof Customer) {
 			return getPrefColor(RentalUIActivator.getDefault().getPreferenceStore().getString(PREF_CUSTOMER_COLOR));
-		} else if (element instanceof RentalAgency) {
+		} else if (element instanceof Rental) {
 			return getPrefColor(RentalUIActivator.getDefault().getPreferenceStore().getString(PREF_RENTAL_COLOR));
 		} else if (element instanceof RentalObject) {
-			return getPrefColor(RentalUIActivator.getDefault().getPreferenceStore().getString(PREF_RENTAL_OBJECT_COLOR));
-		} 
+			return getPrefColor(
+					RentalUIActivator.getDefault().getPreferenceStore().getString(PREF_RENTAL_OBJECT_COLOR));
+		}
 		return null;
 	}
 
@@ -167,15 +164,12 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	private Color getPrefColor(String rgbKey)
-	{
+
+	private Color getPrefColor(String rgbKey) {
 		ColorRegistry colorRegistry = JFaceResources.getColorRegistry();
 
 		Color result = colorRegistry.get(rgbKey);
-		if (result == null)
-		{
+		if (result == null) {
 			// Get value in pref store
 			colorRegistry.put(rgbKey, StringConverter.asRGB(rgbKey));
 			result = colorRegistry.get(rgbKey);

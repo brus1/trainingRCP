@@ -23,6 +23,13 @@
             name="%view.name.0"
             restorable="true">
       </view>
+      <view
+            category="com.opti.rental.ui.category"
+            class="com.opti.rental.ui.views.CustomerView"
+            id="com.opti.rental.ui.view.customer"
+            name="Customer View"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
@@ -91,6 +98,12 @@
             class="com.opti.rental.ui.handler.SampleHandler"
             commandId="com.opti.rental.ui.handler">
       </handler>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.opti.rental.ui.preferance.PreferenceInitializer">
+      </initializer>
    </extension>
 
 </plugin>

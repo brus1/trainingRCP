@@ -23,7 +23,7 @@ public class MyPage extends FieldEditorPreferencePage implements IWorkbenchPrefe
 	@Override
 	protected void createFieldEditors() {
 		addField(new ColorFieldEditor(PREF_CUSTOMER_COLOR, "Customer", getFieldEditorParent()));
-		addField(new ColorFieldEditor(PREF_RENTAL_COLOR, "RentalAgency", getFieldEditorParent()));
+		addField(new ColorFieldEditor(PREF_RENTAL_COLOR, "Rental", getFieldEditorParent()));
 		addField(new ColorFieldEditor(PREF_RENTAL_OBJECT_COLOR, "RentalObject", getFieldEditorParent()));	
 	}
 }
