@@ -49,7 +49,7 @@
          <menu
                label="%menu.label">
             <command
-                  commandId="com.opti.rental.ui.helloworld"
+                  commandId="com.opti.rental.ui.handler"
                   style="push">
             </command>
          </menu>
@@ -60,7 +60,7 @@
          <menu
                label="%menu.label.0">
             <command
-                  commandId="com.opti.rental.ui.helloworld"
+                  commandId="com.opti.rental.ui.handler"
                   style="push">
             </command>
          </menu>
@@ -71,7 +71,7 @@
          <menu
                label="%menu.label.1">
             <command
-                  commandId="com.opti.rental.ui.helloworld"
+                  commandId="com.opti.rental.ui.handler"
                   style="push">
             </command>
          </menu>
@@ -81,15 +81,15 @@
          name="%extension.name"
          point="org.eclipse.ui.commands">
       <command
-            id="com.opti.rental.ui.helloworld"
+            id="com.opti.rental.ui.handler"
             name="%command.name">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.opti.rental.ui.helloworld.SampleHandler"
-            commandId="com.opti.rental.ui.helloworld">
+            class="com.opti.rental.ui.handler.SampleHandler"
+            commandId="com.opti.rental.ui.handler">
       </handler>
    </extension>
 
