@@ -5,6 +5,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
+import org.eclipse.ui.menus.MenuUtil;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
@@ -54,7 +55,7 @@ public class RentalActionBarAdvisor extends ActionBarAdvisor {
 		menuManager.add(quitAction);
 		
 		MenuManager menuManager_1 = new MenuManager("New MenuManager");
-		menuManager_1.setMenuText("Window");
+		menuManager_1.setMenuText("Window2");
 		menuBar.add(menuManager_1);
 		menuManager_1.add(preferencesAction);
 	}

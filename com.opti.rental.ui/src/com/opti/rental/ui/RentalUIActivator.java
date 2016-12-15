@@ -1,7 +1,14 @@
 package com.opti.rental.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -18,6 +25,7 @@ public class RentalUIActivator extends AbstractUIPlugin implements RentalUIConst
 	// The shared instance
 	private static RentalUIActivator plugin;
 	
+	private Map<String, Palette> palettes = new HashMap<>();
 	/**
 	 * The constructor
 	 */
@@ -31,6 +39,8 @@ public class RentalUIActivator extends AbstractUIPlugin implements RentalUIConst
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		getExtensionsAuickAccess();
+		initPalette();
 	}
 
 	/*
@@ -58,5 +68,43 @@ public class RentalUIActivator extends AbstractUIPlugin implements RentalUIConst
 		reg.put(IMG_CUSTOMER, ImageDescriptor.createFromURL(b.getEntry(IMG_CUSTOMER)));
 		reg.put(IMG_RENTAL, ImageDescriptor.createFromURL(b.getEntry(IMG_RENTAL)));
 		reg.put(IMG_AGENCY, ImageDescriptor.createFromURL(b.getEntry(IMG_AGENCY)));
+	}
+	
+	private void getExtensionsAuickAccess() {
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		for(IConfigurationElement e : reg.getConfigurationElementsFor("org.eclipse.ui.views")) {
+			if(e.getName().equals("view")) {
+				System.out.println("Plugin : " + e.getNamespaceIdentifier() + ", " + e.getAttribute("name"));
+			}
+		}
+	}
+	private void withPalette() {
+	IExtensionRegistry reg = Platform.getExtensionRegistry();
+	for(IConfigurationElement e : reg.getConfigurationElementsFor("org.eclipse.ui.views")) {
+		if(e.getName().equals("view")) {
+			System.out.println("Plugin : " + e.getNamespaceIdentifier() + ", " + e.getAttribute("name"));
+		}
+	}
+	}
+	
+	private void initPalette() {
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		for(IConfigurationElement configElement : reg.getConfigurationElementsFor("com.opti.rental.ui.Palette")) {
+			try {
+				Palette palette = new Palette();
+				palette.setId(configElement.getAttribute("id"));
+				palette.setIdName(configElement.getAttribute("name"));
+				palette.setProvider((IColorProvider) configElement.createExecutableExtension("paletteClass"));
+				palettes.put(palette.getId(), palette);
+				System.out.println("Added this palette: " + palette.getIdName());
+			}catch (Exception e1) {
+				System.err.println("Caught IOException: " + e1.getMessage());
+				
+			}
+		}
+	}
+
+	public Map<String, Palette> getPaletteManager() {
+		return palettes;
 	}
 }

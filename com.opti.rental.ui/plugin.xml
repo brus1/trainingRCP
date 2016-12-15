@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="Palette" name="Palette" schema="schema/Palette.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -43,9 +44,15 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="com.opti.rental.ui.MyPage"
+            category="com.opti.rental.ui.pagePalette"
+            class="com.opti.rental.ui.preferance.MyPage"
             id="com.opti.rental.ui.page1"
             name="%page.name">
+      </page>
+      <page
+            class="com.opti.rental.ui.preferance.RentalColorPreferences"
+            id="com.opti.rental.ui.pagePalette"
+            name="Palettes">
       </page>
    </extension>
    <extension
@@ -104,6 +111,19 @@
       <initializer
             class="com.opti.rental.ui.preferance.PreferenceInitializer">
       </initializer>
+   </extension>
+   <extension
+         point="com.opti.rental.ui.Palette">
+      <Palette
+            id="com.opti.rental.ui.PaletteDefault"
+            name="Default"
+            paletteClass="com.opti.rental.ui.palette.DefaultPalette">
+      </Palette>
+      <Palette
+            id="com.opti.rental.ui.Palette.blue"
+            name="BluePalette"
+            paletteClass="com.opti.rental.ui.palette.BluePalette">
+      </Palette>
    </extension>
 
 </plugin>
